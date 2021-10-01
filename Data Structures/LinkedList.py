@@ -63,12 +63,59 @@ class LinkedList:
             data = eval(input('enter data to be inserted '))
             self.insert_at_end(data)
 
-    def insert_at_position(self,data,pos):
+    def insert_at_position(self,pos,data):
         temp = Node(data)
-        p=self.head
-        i=0
-        while i < pos-1 and p.link:
+        if pos == 0:
+            self.insert_in_begning(data)
+            return
+        if self.head is None:
+            print("Empty List")
+            return
+        p = self.head
+        i = 0
+        while i < pos and p:
+            if i == pos-1:
+                temp.link = p.link
+                p.link = temp
+                break
             p = p.link
             i += 1
         if p is None:
-            pass
+            print(pos,'longer than list length')
+
+    def insert_before_node(self,data,x):
+        temp = Node(data)
+        if self.head.data == x:
+            self.insert_in_begning(data)
+            return
+        p = self.head
+        while p.link:
+            if p.link.data == x:
+                temp.link = p.link
+                p.link = temp
+                break
+            p = p.link
+        else:
+            print(x,'Not found')
+
+    def insert_after_node(self,data,x):
+        temp = Node(data)
+        p = self.head
+        while p:
+            if p.data == x:
+                temp.link = p.link
+                p.link =temp
+                break
+            p = p.link
+        else:
+            print(x,"Not found")
+
+    def reverse_list(self):
+        p = self.head
+        prev = None
+        while p:
+            next = p.link
+            p.link = prev
+            prev = p
+            p = next
+        self.head = prev

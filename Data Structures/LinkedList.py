@@ -34,8 +34,7 @@ class LinkedList:
             if p.data == data:
                 print(data,'is found at ',pos)
                 break
-            p = p.link
-            
+            p = p.link     
         else:
             print(data,'is not found')
 
@@ -63,3 +62,13 @@ class LinkedList:
         for i in range(non):
             data = eval(input('enter data to be inserted '))
             self.insert_at_end(data)
+
+    def insert_at_position(self,data,pos):
+        temp = Node(data)
+        p=self.head
+        i=0
+        while i < pos-1 and p.link:
+            p = p.link
+            i += 1
+        if p is None:
+            pass
